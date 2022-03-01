@@ -22,3 +22,15 @@ model Pessoa {
 
   @@map("pessoas")
 }
+
+model Viagem {
+  id         String   @id @default(uuid())
+  destino    String
+  data_ida   DateTime
+  data_volta DateTime
+  titulo     String
+  descricao  String
+  criado_em  DateTime @default(now())
+
+  @@map("viagens")
+}
