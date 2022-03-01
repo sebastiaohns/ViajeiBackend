@@ -20,6 +20,8 @@ model Pessoa {
   cargo     String
   criado_em DateTime @default(now())
 
+  PessoaViagem PessoaViagem[]
+  Atividade    Atividade[]
   @@map("pessoas")
 }
 
@@ -32,5 +34,32 @@ model Viagem {
   descricao  String
   criado_em  DateTime @default(now())
 
+  PessoaViagem PessoaViagem[]
+  Atividade    Atividade[]
   @@map("viagens")
+}
+
+model PessoaViagem {
+  id        String @id @default(uuid())
+  id_pessoa String
+  pessoa    Pessoa @relation(fields: [id_pessoa], references: [id])
+  id_viagem String
+  viagem    Viagem @relation(fields: [id_viagem], references: [id])
+
+  @@map("pessoas_viagens")
+}
+
+model Atividade {
+  id        String   @id @default(uuid())
+  titulo    String
+  descricao String
+  valor     Decimal
+  data      DateTime
+  local     String
+  id_pessoa String
+  pessoa    Pessoa   @relation(fields: [id_pessoa], references: [id])
+  id_viagem String
+  viagem    Viagem   @relation(fields: [id_viagem], references: [id])
+
+  @@map("atividades")
 }
