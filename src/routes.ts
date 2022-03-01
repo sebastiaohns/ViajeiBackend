@@ -1,5 +1,10 @@
 import { Router } from 'express'
+import { CreatePessoaController } from './controllers/CreatePessoaController';
 
 const router = Router();
 
-export { router }
+const createPessoa = new CreatePessoaController();
+
+router.post("/pessoa", createPessoa.handle);
+
+export { router };
